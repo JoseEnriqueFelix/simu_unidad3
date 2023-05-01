@@ -106,18 +106,25 @@ public class JuegoDeLARuleta {
     }
 
     public static void main(String[] args) {
-        System.out.format("%17s", "JUGADOR1\n");
-        System.out.format("%17s %17s %17s %17s %17s %17s %17s %17s %17s", "iteracion", "$ antes", 
-        "Apuesta", "#alea", "Color?", "Ganó?", "$ despues", "usd 1000?", "exito++\n");
-        for(int i=0; i<1000; i++){
-            juega(jugador1, i+1);
-        }
-        System.out.println();
-        System.out.format("%17s", "JUGADOR2\n");
-        System.out.format("%17s %17s %17s %17s %17s %17s %17s %17s %17s", "iteracion", "$ antes", 
-        "Apuesta", "#alea", "Color?", "Ganó?", "$ despues", "usd 1000?", "exito++\n");
-        for(int i=0; i<400; i++){
-            juega(jugador2, i+1);
+        int x=0;
+        while(x!=1){
+            System.out.println("Ingrese la cantidad de iteraciones que desea realizar: ");
+            int n=sc.nextInt();
+            System.out.format("%17s", "JUGADOR1\n");
+            System.out.format("%17s %17s %17s %17s %17s %17s %17s %17s %17s", "iteracion", "$ antes", 
+            "Apuesta", "#alea", "Color?", "Ganó?", "$ despues", "usd 1000?", "exito++\n");
+            for(int i=0; i<n; i++){
+                juega(jugador1, i+1);
+            }
+            System.out.println();
+            System.out.format("%17s", "JUGADOR2\n");
+            System.out.format("%17s %17s %17s %17s %17s %17s %17s %17s %17s", "iteracion", "$ antes", 
+            "Apuesta", "#alea", "Color?", "Ganó?", "$ despues", "usd 1000?", "exito++\n");
+            for(int i=0; i<n; i++){
+                juega(jugador2, i+1);
+            }
+            System.out.println("Ingrese un 1 para salir");
+            x=sc.nextInt();
         }
     }
 }
