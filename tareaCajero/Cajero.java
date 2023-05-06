@@ -6,9 +6,9 @@ public class Cajero {
     static float momentoDeLlegada=0;
     static float tiempoIniciaServicio=0;
     static float tiempoEspera;
-    static String operacion;  //Ver que pez aqui
+    static String operacion;  
     static int tiempoDeOperacion;
-    static float tiempoTerminaServicio;
+    static float tiempoTerminaServicio=0;
     static boolean cajeroOcupado=false;
 
     public static void montecarlo(float random){
@@ -34,16 +34,16 @@ public class Cajero {
         random1=(float) Math.random();
         tiempoEntreLlegada=(float)((-Math.log(1 - random1) / 30) * 60);
         momentoDeLlegada+=tiempoEntreLlegada;
-        if(cajeroOcupado){
-
+        if(tiempoTerminaServicio > momentoDeLlegada){
+            tiempoIniciaServicio=tiempoTerminaServicio;
         }
         else{
-
+            tiempoIniciaServicio=momentoDeLlegada;    
         }
-        //tiempoEspera=;
+        tiempoEspera = tiempoIniciaServicio - momentoDeLlegada;
         random2=(float) Math.random();
         montecarlo(random2);
-        //tiempoTerminaServicio=;
+        tiempoTerminaServicio = tiempoIniciaServicio + tiempoDeOperacion;
     }
 
     public static void main(String[] args) {
