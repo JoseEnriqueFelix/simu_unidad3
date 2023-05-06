@@ -114,7 +114,7 @@ public class JuegoDeLARuleta {
             if(j.getEstrategia().equals("doble")){
                 int nuevaCantidadDeApuesta= 2 * j.getApuesta();
                 j.setApuesta(nuevaCantidadDeApuesta);
-                if(j.getApuesta() >= j.getDinero()){
+                if(j.getApuesta() > j.getDinero()){
                     j.setApuesta(j.getDinero());
                 }
                 if(j.getApuesta() >= 1000){
