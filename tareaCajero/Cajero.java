@@ -11,8 +11,8 @@ public class Cajero {
     static String operacion;  
     static int tiempoDeOperacion;
     static float tiempoTerminaServicio=0;
-    static boolean cajeroOcupado=false;
     static Scanner sc=new Scanner(System.in);
+    static float tiempoDeEsperaTotal=0;
 
     public static void montecarlo(float random){
         if(random <= 0.25){
@@ -37,13 +37,14 @@ public class Cajero {
         random1=(float) Math.random();
         tiempoEntreLlegada=(float)((-Math.log(1 - random1) / 30) * 60);
         momentoDeLlegada+=tiempoEntreLlegada;
-        if(tiempoTerminaServicio > momentoDeLlegada){
+        if(tiempoTerminaServicio > (momentoDeLlegada*60)){
             tiempoIniciaServicio=tiempoTerminaServicio;
         }
         else{
-            tiempoIniciaServicio=momentoDeLlegada;    
+            tiempoIniciaServicio=momentoDeLlegada*60;    
         }
-        tiempoEspera = tiempoIniciaServicio - momentoDeLlegada;
+        tiempoEspera = tiempoIniciaServicio - (momentoDeLlegada*60);
+        tiempoDeEsperaTotal+=tiempoEspera;
         random2=(float) Math.random();
         montecarlo(random2);
         tiempoTerminaServicio = tiempoIniciaServicio + tiempoDeOperacion;
@@ -63,10 +64,14 @@ public class Cajero {
                     System.out.format("%8s %15s %20s %20s %20s %20s %15s %20s %20s %24s", j+1, random1, tiempoEntreLlegada, momentoDeLlegada,
                         tiempoIniciaServicio, tiempoEspera, random2, operacion, tiempoDeOperacion, tiempoTerminaServicio + "\n");
                 }
+                System.out.println("El tiempo de espera total ha sido de " + tiempoDeEsperaTotal + " segundos.");
+                System.out.println("El tiempo de espera total ha sido de " + tiempoDeEsperaTotal/60 + " minutos.");
+                System.out.println("El tiempo de espera total ha sido de " + tiempoDeEsperaTotal/3600 + " horas.");
                 System.out.println();
                 momentoDeLlegada=0;
                 tiempoIniciaServicio=0;
                 tiempoTerminaServicio=0;
+                tiempoDeEsperaTotal=0;
             }
             System.out.println("Ingrese 1 si desea salir:");
             x=sc.nextInt();
