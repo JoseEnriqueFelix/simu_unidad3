@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Cajero {
     
     static float random1;
@@ -10,6 +12,7 @@ public class Cajero {
     static int tiempoDeOperacion;
     static float tiempoTerminaServicio=0;
     static boolean cajeroOcupado=false;
+    static Scanner sc=new Scanner(System.in);
 
     public static void montecarlo(float random){
         if(random <= 0.25){
@@ -47,16 +50,26 @@ public class Cajero {
     }
 
     public static void main(String[] args) {
-        System.out.format("%8s %20s %20s %20s %20s %20s %20s %20s %20s %24s", "Usuario", "#alea1", "T. entre llegada", "Momento de llegada",
-            "T. inicia servicio", "T. espera/atencion", "#alea2", "Operación", "T. de operación", "T. termina servicio \n");
-            for(int i=0; i<100; i++){
-                tabla();
-                System.out.format("%8s %20s %20s %20s %20s %20s %20s %20s %20s %24s", i+1, random1, tiempoEntreLlegada, momentoDeLlegada,
-                    tiempoIniciaServicio, tiempoEspera, random2, operacion, tiempoDeOperacion, tiempoTerminaServicio + "\n");
+        int x=0;
+        int n;
+        while (x != 1) {
+            System.out.println("Ingrese el valor de n:");
+            n=sc.nextInt();
+            for(int i=0; i<n; i++){
+                System.out.format("%8s %15s %20s %20s %20s %20s %15s %20s %20s %24s", "Usuario", "#alea1", "T. entre llegada", "Momento de llegada",
+                    "T. inicia servicio", "T. espera/atencion", "#alea2", "Operación", "T. de operación", "T. termina servicio \n");
+                for (int j = 0; j < 100; j++) {
+                    tabla();
+                    System.out.format("%8s %15s %20s %20s %20s %20s %15s %20s %20s %24s", j+1, random1, tiempoEntreLlegada, momentoDeLlegada,
+                        tiempoIniciaServicio, tiempoEspera, random2, operacion, tiempoDeOperacion, tiempoTerminaServicio + "\n");
+                }
+                System.out.println();
+                momentoDeLlegada=0;
+                tiempoIniciaServicio=0;
+                tiempoTerminaServicio=0;
             }
-            //momentoDeLlegada=0;
-            //tiempoIniciaServicio=0;
-      
+            System.out.println("Ingrese 1 si desea salir:");
+            x=sc.nextInt();
+        }
     }
-    
 }
